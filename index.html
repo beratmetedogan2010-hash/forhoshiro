@@ -53,6 +53,29 @@ nav {
 }
 .nav-logo { font-family:var(--script);font-size:1.4rem;color:var(--rose-deep);letter-spacing:0.02em; }
 .nav-links { display:flex;align-items:center;gap:0.25rem; }
+.nav-dropdown { position:relative; }
+.nav-dropbtn {
+  font-family:var(--sans);font-size:11px;letter-spacing:0.1em;color:var(--text-light);
+  padding:0.38rem 0.85rem;border-radius:999px;border:1px solid transparent;
+  transition:all 0.2s;cursor:none;background:none;user-select:none;
+}
+.nav-dropbtn:hover, .nav-dropdown.open .nav-dropbtn {
+  color:var(--rose-deep);border-color:rgba(233,160,176,0.45);background:rgba(249,198,208,0.18);
+}
+.nav-dropdown-content {
+  display:none;position:absolute;top:calc(100% + 0.5rem);left:50%;
+  transform:translateX(-50%);
+  background:rgba(253,248,245,0.97);backdrop-filter:blur(16px);
+  border:1px solid rgba(233,160,176,0.25);border-radius:14px;
+  padding:0.5rem;min-width:150px;z-index:300;
+  box-shadow:0 8px 32px rgba(200,100,130,0.1);
+  flex-direction:column;gap:0.15rem;
+  animation:pageIn 0.2s ease both;
+}
+.nav-dropdown.open .nav-dropdown-content { display:flex; }
+.nav-dropdown-content .nav-link {
+  display:block;width:100%;text-align:center;border-radius:10px;padding:0.45rem 1rem;
+}
 .nav-link {
   font-family:var(--sans);font-size:11px;letter-spacing:0.1em;color:var(--text-light);
   text-decoration:none;padding:0.38rem 0.85rem;border-radius:999px;
@@ -302,7 +325,34 @@ nav {
 .egg-hearts { font-size:2rem;letter-spacing:0.5rem;margin-top:1.5rem;animation:heartbeat 1.5s ease-in-out infinite; }
 .egg-hint { font-size:10px;letter-spacing:0.2em;color:var(--mauve);text-transform:uppercase;margin-top:1rem;opacity:0.6; }
 
-/* ── FOOTER ── */
+/* ── OPEN WHEN ── */
+#page-openwhen { background: var(--cream); padding: 80px 2rem 5rem; }
+.openwhen-wrap { max-width: 700px; width: 100%; }
+.openwhen-intro { font-family: var(--serif); font-size: 1.05rem; font-style: italic; color: var(--text-light); line-height: 1.8; text-align: center; margin-bottom: 2.5rem; }
+.openwhen-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+.ow-btn {
+  background: white; border: 1px solid rgba(233,160,176,0.25); border-radius: 18px;
+  padding: 1.5rem 1.25rem; text-align: center; cursor: none;
+  transition: all 0.25s ease; font-family: var(--serif); font-size: 1rem;
+  font-style: italic; color: var(--text); line-height: 1.5;
+}
+.ow-btn:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(200,100,130,0.12); border-color: rgba(233,160,176,0.5); background: #fff5f7; }
+.ow-btn-icon { font-size: 1.5rem; display: block; margin-bottom: 0.5rem; }
+.ow-modal-overlay {
+  position: fixed; inset: 0; z-index: 400;
+  background: rgba(253,240,243,0.96); backdrop-filter: blur(10px);
+  display: none; flex-direction: column; align-items: center; justify-content: center;
+  padding: 2rem; text-align: center;
+}
+.ow-modal-overlay.show { display: flex; animation: pageIn 0.35s ease both; }
+.ow-modal-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--mauve); margin-bottom: 1rem; }
+.ow-modal-msg { font-family: var(--serif); font-size: clamp(1.2rem, 3.5vw, 1.7rem); font-style: italic; font-weight: 300; color: var(--text); line-height: 1.8; max-width: 560px; }
+.ow-modal-actions { display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; justify-content: center; }
+.ow-another { background: none; border: 1px solid rgba(233,160,176,0.4); border-radius: 999px; padding: 0.5rem 1.5rem; font-family: var(--serif); font-style: italic; font-size: 0.95rem; color: var(--rose-deep); cursor: none; transition: all 0.2s; }
+.ow-another:hover { background: rgba(249,198,208,0.15); }
+.ow-close { background: none; border: none; font-size: 1rem; color: var(--mauve); cursor: none; font-family: var(--serif); font-style: italic; transition: color 0.2s; padding: 0.5rem 1rem; }
+.ow-close:hover { color: var(--rose-deep); }
+
 footer { position:relative;z-index:2;text-align:center;padding:5rem 2rem;background:var(--rose-pale);display:none; }
 .footer-heart { display:block;font-size:2.5rem;margin-bottom:1.5rem;animation:heartbeat 1.8s ease-in-out infinite; }
 @keyframes heartbeat { 0%,100%{transform:scale(1)} 50%{transform:scale(1.2)} }
@@ -315,8 +365,10 @@ footer small { display:block;margin-top:0.75rem;font-size:11px;letter-spacing:0.
   .nav-logo { width:100%; text-align:center; font-size:1rem; padding-bottom:0.2rem; }
   .nav-links { width:100%; justify-content:center; flex-wrap:wrap; gap:0.15rem; }
   .nav-link { font-size:10px; padding:0.28rem 0.55rem; }
-  .page { padding-top:95px; }
-  #page-hero { padding-top:105px; }
+  .nav-dropbtn { font-size:10px; padding:0.28rem 0.55rem; }
+  .nav-dropdown-content { left:0; transform:none; min-width:130px; }
+  .page { padding-top:110px; }
+  #page-hero { padding-top:120px; }
   .timeline::before { left:1.25rem; }
   .timeline-item,.timeline-item:nth-child(even) { justify-content:flex-start;padding:0 0 0 3rem; }
   .timeline-dot { left:1.25rem; }
@@ -368,14 +420,33 @@ footer small { display:block;margin-top:0.75rem;font-size:11px;letter-spacing:0.
   <span class="nav-logo">for hoshiro</span>
   <div class="nav-links">
     <a class="nav-link" data-page="hero">home</a>
-    <a class="nav-link" data-page="reasons">why you</a>
-    <a class="nav-link" data-page="memories">us</a>
-    <a class="nav-link" data-page="photos">photos</a>
-    <a class="nav-link" data-page="playlist">playlist</a>
-    <a class="nav-link" data-page="bucket">bucket list</a>
-    <a class="nav-link" data-page="countdown">countdown</a>
-    <a class="nav-link" data-page="guestbook">leave a note</a>
-    <a class="nav-link" data-page="letter">a letter</a>
+
+    <div class="nav-dropdown">
+      <button class="nav-dropbtn">about you ▾</button>
+      <div class="nav-dropdown-content">
+        <a class="nav-link" data-page="reasons">why you</a>
+        <a class="nav-link" data-page="photos">photos</a>
+        <a class="nav-link" data-page="letter">a letter</a>
+      </div>
+    </div>
+
+    <div class="nav-dropdown">
+      <button class="nav-dropbtn">us ▾</button>
+      <div class="nav-dropdown-content">
+        <a class="nav-link" data-page="memories">memories</a>
+        <a class="nav-link" data-page="bucket">bucket list</a>
+        <a class="nav-link" data-page="countdown">countdown</a>
+      </div>
+    </div>
+
+    <div class="nav-dropdown">
+      <button class="nav-dropbtn">for you ▾</button>
+      <div class="nav-dropdown-content">
+        <a class="nav-link" data-page="openwhen">open when</a>
+        <a class="nav-link" data-page="playlist">playlist</a>
+        <a class="nav-link" data-page="guestbook">leave a note</a>
+      </div>
+    </div>
   </div>
 </nav>
 
@@ -474,10 +545,6 @@ footer small { display:block;margin-top:0.75rem;font-size:11px;letter-spacing:0.
   </div>
   <div class="photos-intro"><p>tap any slot to add a photo and give it a lil caption 🤍</p></div>
   <div class="photos-grid" id="photoGrid"></div>
-  <div class="photos-bottom">
-    <div class="photo-note" contenteditable="true">write something about these photos here, a memory, how you were feeling, anything</div>
-    <div class="photo-note" contenteditable="true">or just leave a message for hoshiro about what these moments meant to you</div>
-  </div>
 </div>
 
 <!-- PLAYLIST -->
@@ -535,6 +602,37 @@ i love you. unrelentingly. chaotically. completely. i'm not going anywhere.</div
   </div>
 </div>
 
+<!-- OPEN WHEN MODAL -->
+<div class="ow-modal-overlay" id="owModal">
+  <p class="ow-modal-label" id="owModalLabel"></p>
+  <p class="ow-modal-msg" id="owModalMsg"></p>
+  <div class="ow-modal-actions">
+    <button class="ow-another" id="owAnother">another one 🤍</button>
+    <button class="ow-close" id="owClose">close</button>
+  </div>
+</div>
+
+<!-- OPEN WHEN PAGE -->
+<div id="page-openwhen" class="page">
+  <div class="section-header">
+    <span class="section-tag">for whenever</span>
+    <h2 class="section-title">open <em>when</em></h2>
+    <p class="section-sub">tap whichever one you need right now reju</p>
+  </div>
+  <div class="openwhen-wrap">
+    <p class="openwhen-intro">whatever you're feeling, there's something here for you. i wrote these thinking of you 🤍</p>
+    <div class="openwhen-grid">
+      <button class="ow-btn" data-topic="miss"><span class="ow-btn-icon">🤍</span>you miss me</button>
+      <button class="ow-btn" data-topic="sad"><span class="ow-btn-icon">🤍</span>you're sad</button>
+      <button class="ow-btn" data-topic="doubt"><span class="ow-btn-icon">🤍</span>you're doubting yourself</button>
+      <button class="ow-btn" data-topic="loved"><span class="ow-btn-icon">🤍</span>you need a reminder you're loved</button>
+      <button class="ow-btn" data-topic="sleep"><span class="ow-btn-icon">🤍</span>you can't sleep</button>
+      <button class="ow-btn" data-topic="proud"><span class="ow-btn-icon">🤍</span>you're proud of yourself</button>
+      <button class="ow-btn" data-topic="nice"><span class="ow-btn-icon">🤍</span>you just wanna hear something nice</button>
+    </div>
+  </div>
+</div>
+
 <!-- EASTER EGG -->
 <div id="easter-egg">
   <button class="egg-close" id="eggClose">✕</button>
@@ -559,7 +657,7 @@ i love you. unrelentingly. chaotically. completely. i'm not going anywhere.</div
       <div class="countdown-unit"><span class="countdown-num" id="cdMins">...</span><span class="countdown-label">minutes</span></div>
       <div class="countdown-unit"><span class="countdown-num" id="cdSecs">...</span><span class="countdown-label">seconds</span></div>
     </div>
-    <p class="countdown-date-note">april 12, 2028 🤍 mete turns 18 🤍 we finally meet</p>
+    <p class="countdown-date-note">april 12, 2028 🤍 i turn 18 🤍 we finally meet (hopefully)</p>
   </div>
 </div>
 
@@ -591,7 +689,7 @@ i love you. unrelentingly. chaotically. completely. i'm not going anywhere.</div
       <button class="guestbook-submit" id="guestbookSubmit">leave it here 🤍</button>
     </div>
     <div class="guestbook-entries" id="guestbookEntries">
-      <p class="guestbook-empty" id="guestbookEmpty">no notes yet, be the first 🤍</p>
+      <p class="guestbook-empty" id="guestbookEmpty"></p>
     </div>
   </div>
 </div>
@@ -723,6 +821,25 @@ function updateCountdown() {
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
+// DROPDOWNS
+document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+  const btn = dropdown.querySelector('.nav-dropbtn');
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    const isOpen = dropdown.classList.contains('open');
+    document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+    if (!isOpen) dropdown.classList.add('open');
+  });
+});
+document.addEventListener('click', () => {
+  document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+});
+document.querySelectorAll('.nav-dropdown-content .nav-link').forEach(link => {
+  link.addEventListener('click', () => {
+    document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+  });
+});
+
 // TAB SWITCHING
 const siteFooter = document.getElementById('site-footer');
 function showPage(id) {
@@ -733,6 +850,7 @@ function showPage(id) {
   const link = document.querySelector(`.nav-link[data-page="${id}"]`);
   if(link) link.classList.add('active');
   siteFooter.style.display = id==='letter' ? 'block' : 'none';
+  if(id==='openwhen') getOwDeviceCode();
   window.scrollTo({top:0,behavior:'instant'});
 }
 document.querySelectorAll('.nav-link').forEach(l=>l.addEventListener('click',()=>showPage(l.dataset.page)));
@@ -881,7 +999,138 @@ document.getElementById('guestbookSubmit').addEventListener('click', async ()=>{
   }
 });
 
-// EASTER EGG
+// OPEN WHEN device code
+function getOwDeviceCode() {
+  let code = localStorage.getItem('ow_device_code');
+  if (!code) {
+    code = 'dev_' + Math.random().toString(36).slice(2, 10).toUpperCase();
+    localStorage.setItem('ow_device_code', code);
+    // first time this device visits open when, notify
+    fetch('https://formspree.io/f/xdawlzol', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ message: 'new device visited open when. code: ' + code })
+    }).catch(()=>{});
+  }
+  return code;
+}
+const owMessages = {
+  miss: [
+    "i miss you too. probably more than you think. you're literally the first thing i think about and it's genuinely unfair how much space you take up in my head",
+    "hey, missing me means you care, and that alone makes me the happiest person alive. i'll be right here. always.",
+    "i know the distance is annoying as hell but just know every single day that passes is one day closer to april 12 2028. we're getting there reju",
+    "missing someone this much is actually insane like you're not even here and you still manage to make my day better just by existing",
+    "you know what's funny, i could be doing literally anything and somehow my brain finds a way to think about you. you're everywhere reju",
+    "the distance is temporary. us is not. remember that 🤍",
+  ],
+  sad: [
+    "hey. whatever it is, it's valid. you don't have to be okay right now. just know i'm here even when i can't physically be",
+    "you've been through so much and you're still here, still going. that's not nothing. that's everything. i'm proud of you even on your worst days",
+    "i wish i could just sit next to you rn and not even say anything. just be there. one day i will be. for now just know you're not alone in this 🤍",
+    "you don't have to explain it or make it make sense. just feel it. i'm not going anywhere",
+    "some days are just heavy and that's okay. you don't have to fix it right now. just breathe.",
+    "hey sad reju, you're still my favourite reju. that doesn't change based on how you're feeling today 🤍",
+  ],
+  doubt: [
+    "bro you literally make art that makes me cry, you make me feel safe from another country, and you somehow put up with me. you are not the problem",
+    "whatever your brain is telling you rn it's lying. i know you better than that voice does and you are genuinely one of the most remarkable people i've ever met",
+    "the fact that you're still standing after everything you've been through? that's strength most people don't have. don't let a bad moment make you forget that",
+    "you are not too little. you are exactly right and the people who made you feel otherwise were wrong. whether you believe it or not ml.",
+    "name one person who does what you do the way you do it. i'll wait. exactly. there's no one like you.",
+    "doubt is just fear wearing a disguise. you've beaten scarier things than this. you got it.",
+  ],
+  loved: [
+    "you are so loved reju. by me, unrelentingly, completely AND forever. that's not going anywhere",
+    "i built an entire website for you. at 1am. multiple times. you are LOVED bro what else do you need 🤍 🤍 🤍",
+    "you are my favourite person on this entire planet. that's not something i say lightly. you're it for me.",
+    "loved doesn't even cover it honestly. you are cherished. genuinely.",
+    "i think about you every single day without trying. that's not something i can control at this point and honestly i don't want to",
+    "there is not a version of my life that's better without you in it. just so you know 🤍",
+  ],
+  sleep: [
+    "hey insomniac 😭 remember that one night we stayed up till 4am talking about literally nothing? that's my favourite memory. you make even 4am feel worth it",
+    "go drink some water, get comfy, and just know somewhere out there i'm probably also awake thinking about you like a loser 🤍",
+    "you know what's crazy, even when you can't sleep you're still the most important person in my world. rest up baby you deserve it",
+    "okay since you're up anyway, think about something that made you smile today. even something tiny. hold onto that.",
+    "hey babeee js go to sleep ok? promise whatevers keeping you awake is a buncha bs. we'll talk about it tmrw alright?",
+    "i hope your next dream is a good one. you deserve a full night of nothing but good things 🤍",
+  ],
+  proud: [
+    "YESSS reju THAT'S MY BABY 😭🔥 i knew you could do it. i always knew.",
+    "okay but can we talk about how you literally never give yourself enough credit?? this is your sign to celebrate yourself fr you earned it",
+    "i am so genuinely proud of you. not just for this, for everything. you work so hard and you deserve every good thing that comes your way 🤍",
+    "wait wait wait hold on, you did THAT?? okay yeah THAT is my fav person fr",
+    "proud of you doesn't even scratch the surface. i'm genuinely in awe of you sometimes",
+    "you should feel this way more often because you do things worth being proud of literally all the time, you just don't notice 🤍",
+  ],
+  nice: [
+    "you have the most disarming energy of anyone i've ever met. like you don't even try and you just make everything better",
+    "your face when you're excited about something is literally the best thing in the world. i hope you know that.",
+    "you are genuinely so special reju. not in a cliche way. in a 'i notice all the little things about you and every single one of them is wonderful' way 🤍",
+    "okay nice thing incoming: you. just you in general. that's it that's the nice thing 🤍",
+    "you make people feel seen without even trying. that's one of the most beautiful things a person can do",
+    "the way you care about people is so rare. like you actually mean it and i can see it. you're a gift reju.",
+  ],
+};
+const owLabels = {
+  miss: "open when you miss me",
+  sad: "open when you're sad",
+  doubt: "open when you're doubting yourself",
+  loved: "open when you need a reminder you're loved",
+  sleep: "open when you can't sleep",
+  proud: "open when you're proud of yourself",
+  nice: "open when you just wanna hear something nice",
+};
+let currentOwTopic = null;
+let lastOwIndex = -1;
+
+function getRandomMsg(topic) {
+  const pool = owMessages[topic];
+  let idx;
+  do { idx = Math.floor(Math.random() * pool.length); } while (idx === lastOwIndex && pool.length > 1);
+  lastOwIndex = idx;
+  return pool[idx];
+}
+
+async function notifyFormspree(topic) {
+  const code = getOwDeviceCode();
+  try {
+    await fetch('https://formspree.io/f/xdawlzol', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ message: '[' + code + '] opened: ' + owLabels[topic] })
+    });
+  } catch(e) {}
+}
+
+const owModal = document.getElementById('owModal');
+const owModalLabel = document.getElementById('owModalLabel');
+const owModalMsg = document.getElementById('owModalMsg');
+
+document.querySelectorAll('.ow-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const topic = btn.dataset.topic;
+    currentOwTopic = topic;
+    lastOwIndex = -1;
+    owModalLabel.textContent = owLabels[topic];
+    owModalMsg.textContent = getRandomMsg(topic);
+    owModal.classList.add('show');
+    notifyFormspree(topic);
+  });
+});
+
+document.getElementById('owAnother').addEventListener('click', () => {
+  owModalMsg.style.opacity = '0';
+  owModalMsg.style.transform = 'translateY(8px)';
+  setTimeout(() => {
+    owModalMsg.textContent = getRandomMsg(currentOwTopic);
+    owModalMsg.style.transition = 'all 0.3s ease';
+    owModalMsg.style.opacity = '1';
+    owModalMsg.style.transform = 'translateY(0)';
+  }, 200);
+});
+
+document.getElementById('owClose').addEventListener('click', () => owModal.classList.remove('show'));
 let logoClicks = 0;
 const eggOverlay = document.getElementById('easter-egg');
 document.querySelector('.nav-logo').addEventListener('click', ()=>{
